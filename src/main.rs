@@ -1,6 +1,6 @@
 use yew::prelude::*;
 use yew::web_sys::HtmlInputElement;
-use yew::{ NodeRef, web_sys::Element };
+use yew::{ NodeRef };
 use wasm_logger;
 
 use todo::TodoType;
@@ -53,23 +53,23 @@ impl Component for Model {
     }
 
     fn view(&self) -> Html {
-        
-        log::info!("Hi");
         let submit_onclick = self.link.callback(|_| Msg::AddTodo);
         html! {
-            <div>
-                <h1>{ "Todo List" }</h1>
-                <input
-                    ref=self.input_ref.clone()
-                />
+            <section class="section">
+                <div class="container">
+                    <h1>{ "Todo List" }</h1>
+                    <input
+                        ref=self.input_ref.clone()
+                    />
 
-                <button onclick=submit_onclick
-                >{ "Submit" }</button>
+                    <button onclick=submit_onclick
+                    >{ "Submit" }</button>
 
-                <ul>
-                    { for self.todos.iter().map(|p| p.render()) }
-                </ul>
-            </div>
+                    <ul>
+                        { for self.todos.iter().map(|p| p.render()) }
+                    </ul>
+                </div>
+            </section>
         }
     }
 }
